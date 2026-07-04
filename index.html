@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>More's INUKA FRAGRANCES | Luxury in a Bottle</title>
+<style>
+:root{--black:#0B0B0B;--rose:#B76E79;--white:#fff}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',Segoe UI,Arial,sans-serif}
+body{background:var(--white);color:var(--black);line-height:1.6}
+.wrap{max-width:1100px;margin:auto;padding:20px}
+
+/* HEADER */
+header{background:var(--white);border-bottom:1px solid #f0e7ea;position:sticky;top:0;z-index:200}
+header .wrap{display:flex;justify-content:space-between;align-items:center;padding:12px 20px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{height:44px;width:auto;border-radius:8px;object-fit:cover}
+.brand span{font-family:Georgia,serif;font-size:18px;font-weight:700;color:var(--black)}
+.brand span b{color:var(--rose)}
+
+nav{display:flex;gap:16px}
+nav a{color:var(--black);text-decoration:none;font-weight:600;font-size:14px;transition:.3s}
+nav a:hover{color:var(--rose)}
+
+/* PREMIUM HAMBURGER */
+.menu-btn{display:none;width:30px;height:30px;position:relative;cursor:pointer;z-index:300}
+.menu-btn span{position:absolute;left:0;width:100%;height:3px;background:var(--black);border-radius:3px;transition:.4s ease}
+.menu-btn span:nth-child(1){top:6px}
+.menu-btn span:nth-child(2){top:14px}
+.menu-btn span:nth-child(3){top:22px}
+#menu-toggle:checked + .menu-btn span:nth-child(1){transform:rotate(45deg);top:14px;background:var(--rose)}
+#menu-toggle:checked + .menu-btn span:nth-child(2){opacity:0}
+#menu-toggle:checked + .menu-btn span:nth-child(3){transform:rotate(-45deg);top:14px;background:var(--rose)}
+
+/* SIDE DRAWER MENU */
+.side-menu{position:fixed;top:0;right:-100%;width:80%;max-width:320px;height:100vh;background:var(--white);box-shadow:-5px 0 20px rgba(0,0,0,.1);transition:right .4s cubic-bezier(.77,0,.175,1);z-index:250;padding:80px 20px 20px;display:flex;flex-direction:column;gap:5px}
+#menu-toggle:checked ~ .side-menu{right:0}
+.side-menu a{color:var(--black);text-decoration:none;font-weight:600;font-size:16px;padding:14px 10px;border-bottom:1px solid #f5f5f5;display:flex;align-items:center;gap:10px;transition:.3s}
+.side-menu a:hover{background:#fffafc;color:var(--rose)}
+.side-menu .menu-btn-cta{margin-top:20px;background:var(--rose);color:#fff;text-align:center;border-radius:10px;border:0}
+.side-menu .menu-btn-cta:hover{background:var(--black);color:#fff}
+.overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);z-index:240}
+#menu-toggle:checked ~ .overlay{display:block}
+#menu-toggle{display:none}
+
+.hero{background:linear-gradient(180deg,#fffafc 0%, #fff 100%);text-align:center;padding:50px 20px}
+.hero h1{font-family:Georgia,serif;font-size:36px;color:var(--black);margin-bottom:12px}
+.hero h1 span{color:var(--rose)}
+.hero p{max-width:600px;margin:0 auto 20px;color:#444;font-size:15px}
+
+/* QUOTE OF THE DAY */
+.quote-section{background:var(--black);color:var(--white);text-align:center;padding:40px 20px}
+.quote-box{max-width:700px;margin:auto}
+.quote-text{font-family:Georgia,serif;font-size:22px;font-style:italic;margin-bottom:10px}
+.quote-author{color:var(--rose);font-weight:700}
+.quote-dots{display:flex;justify-content:center;gap:8px;margin-top:15px}
+.dot{width:10px;height:10px;border-radius:50%;background:#444;cursor:pointer;transition:.3s}
+.dot.active{background:var(--rose)}
+
+.btn{background:var(--rose);color:var(--white);padding:14px 24px;border-radius:10px;text-decoration:none;font-weight:800;display:inline-block;border:0;box-shadow:0 6px 14px rgba(183,110,121,.3);transition:.3s}
+.btn:hover{filter:brightness(.95);transform:translateY(-2px)}
+.btn.black{background:var(--black)}
+
+section{padding:50px 20px}
+h2{font-family:Georgia,serif;font-size:28px;text-align:center;margin-bottom:30px}
+
+/* HORIZONTAL SCROLL */
+.scroller-wrap{overflow:hidden}
+.scroller{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 0;scroll-behavior:smooth}
+.scroller::-webkit-scrollbar{height:8px}
+.scroller::-webkit-scrollbar-thumb{background:var(--rose);border-radius:10px}
+.card{min-width:280px;max-width:280px;scroll-snap-align:start;border:1px solid #f3eef0;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.04);transition:.3s}
+.card:hover{transform:translateY(-6px);box-shadow:0 10px 20px rgba(183,110,121,.2)}
+.card img{width:100%;height:240px;object-fit:cover}
+.card .p{padding:14px}
+.price{font-weight:800;color:var(--black);font-size:18px}
+.small{font-size:12px;color:#666}
+.btn-small{width:100%;text-align:center;margin-top:8px;font-size:14px;padding:10px;background:var(--rose);color:#fff;border-radius:8px;text-decoration:none;display:block;font-weight:700;transition:.3s}
+.btn-small:hover{background:var(--black)}
+
+/* TESTIMONIALS */
+.testimonials{background:#fffafc}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.testi-card{background:#fff;border:1px solid #f3eef0;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.04)}
+.stars{color:#FFB400;margin-bottom:8px}
+.testi-card p{font-style:italic;color:#444;margin-bottom:10px}
+.testi-card b{color:var(--rose)}
+
+.about{background:var(--black);color:var(--white);text-align:center}
+.about p{max-width:700px;margin:12px auto 0;opacity:.9}
+.contact{text-align:center}
+footer{background:var(--black);color:#aaa;text-align:center;padding:20px;font-size:13px}
+
+/* MOBILE */
+@media(max-width:800px){
+  .hero h1{font-size:28px}
+  .quote-text{font-size:18px}
+  nav{display:none}
+  .menu-btn{display:block}
+  .card{min-width:85vw}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <img src="logo.jpg" alt="More's INUKA FRAGRANCES Logo">
+      <span>More's <b>INUKA</b></span>
+    </div>
+    
+    <nav>
+      <a href="#ladies">Ladies</a>
+      <a href="#gentlemen">Gentlemen</a>
+      <a href="#bodycare">Body Care</a>
+      <a href="#quote">Quote</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-btn">
+      <span></span><span></span><span></span>
+    </label>
+
+    <div class="side-menu">
+      <a href="#ladies">👑 Ladies</a>
+      <a href="#gentlemen">🎩 Gentlemen</a>
+      <a href="#bodycare">✨ Body Care</a>
+      <a href="#quote">💬 Quote of the Day</a>
+      <a href="#testimonials">⭐ Reviews</a>
+      <a href="#about">👤 About More</a>
+      <a href="#contact">📞 Contact</a>
+      <a class="menu-btn-cta" href="https://wa.me/0788002483" target="_blank">Order Now on WhatsApp</a>
+    </div>
+    <label for="menu-toggle" class="overlay"></label>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Smell Expensive. <span>Live Independent.</span></h1>
+    <p>Curated Inuka Fragrances by More - For the resilient woman who never settles. Always dressed well, always delivered.</p>
+    <a class="btn" href="https://wa.me/0788002483?text=Hi%20More%2C%20I%20want%20to%20shop%20Inuka%20Fragrances" target="_blank">Shop on WhatsApp: 078 800 2483</a>
+  </div>
+</section>
+
+<!-- QUOTE OF THE DAY SECTION -->
+<section id="quote" class="quote-section">
+  <div class="wrap">
+    <div class="quote-box">
+      <div class="quote-text" id="quoteText">"No error stops me from getting your order to you."</div>
+      <div class="quote-author" id="quoteAuthor">- More</div>
+      <div class="quote-dots" id="quoteDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 1: LADIES -->
+<!-- SECTION 1: LADIES -->
+<section id="ladies">
+  <div class="wrap">
+    <h2>Perfumes • Lotions</h2>
+    <div class="scroller-wrap">
+      <div class="scroller">
+        
+        <div class="card">
+          <img src="pl.jpg" alt="Creed Aventus Her Perfume">
+          <div class="p">
+            <b>Creed Aventus Her Perfume + Luxury Lotion</b>
+            <div class="small">Exclusive Set 30ml</div>
+            <div class="price">$30</div>
+            <a class="btn-small" href="https://wa.me/0788002483?text=Hi%20More%2C%20I%20want%20Creed%20Aventus%20Set%20-%20%2430" target="_blank">Order Now</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="ib.jpg" alt="Inuka Black">
+          <div class="p">
+            <b>Inuka Black Perfume</b>
+            <div class="small">30mls</div>
+            <div class="price">$25</div>
+            <a class="btn-small" href="https://wa.me/0788002483?text=Hi%20More%2C%20I%20want%20Inuka%20Black%20-%20%2425" target="_blank">Order Now</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="mm.jpg" alt="Modern Me Perfume">
+          <div class="p">
+            <b>Modern Me Perfume</b>
+            <div class="small">30ml</div>
+            <div class="price">$15</div>
+            <a class="btn-small" href="https://wa.me/0788002483?text=Hi%20More%2C%20I%20want%20Creed%20Aventus%20Set%20-%20%2430" target="_blank">Order Now</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="ir.jpg" alt="Inuka Red Lotion + Perfume">
+          <div class="p">
+            <b>Inuka Red Lotion + Perfume</b>
+            <div class="small">30ml</div>
+            <div class="price">$20</div>
+            <a class="btn-small" href="https://wa.me/0788002483?text=Hi%20More%2C%20I%20want%20Creed%20Aventus%20Set%20-%20%2430" target="_blank">Order Now</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 2: GENTLEMEN -->
+<!--<section id="gentlemen" style="background:#fffafc">
+  <div class="wrap">
+    <h2>Gentlemen Fragrances</h2>
+    <div class="scroller-wrap">
+      <div class="scroller">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=800" alt="Inuka Royal">
+          <div class="p">
+            <b>Inuka Royal</b><div class="small">30ml EDP - Gentlemen</div>
+            <div class="price">$25</div>
+            <a class="btn-small" href="https://wa.me/0788002483?text=Hi%20More%2C%20I%20want%20Inuka%20Royal%20-%20%2425" target="_blank">Order Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- SECTION 3: BODY CARE -->
+<section id="bodycare">
+  <div class="wrap">
+    <h2>Body Care • Cosmetics • Diffusers</h2>
+    <div class="scroller-wrap">
+      <div class="scroller">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=800" alt="Inuka Diffuser">
+          <div class="p">
+            <b>Inuka Diffuser</b><div class="small">Room Fragrance</div>
+            <div class="price">$15</div>
+            <a class="btn-small" href="https://wa.me/0788002483?text=Hi%20More%2C%20I%20want%20Inuka%20Diffuser%20-%20%2415" target="_blank">Order Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials">
+  <div class="wrap">
+    <h2>What Customers Say</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★</div>
+        <p>"Inuka Black lasts all day! More delivered to me in Gweru in 2 hours. 100% authentic."</p>
+        <b>- Tariro M, Gweru</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="wrap">
+    <h2>Meet More</h2>
+    <p><b>Independent. Hard-working. Unstoppable.</b></p>
+    <p>Call or WhatsApp 078 800 2483. No error stops me from getting your order to you.</p>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Order From More Today</h2>
+    <a class="btn" href="https://wa.me/0788002483" target="_blank">💬 WhatsApp 078 800 2483</a>
+    <a class="btn black" href="tel:0788002483">📞 Call 078 800 2483</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 More's INUKA FRAGRANCES. Designed for the Unbreakable Woman.
+</footer>
+
+<script>
+// QUOTE ROTATOR - BUSINESS/MOTIVATIONAL/LUXURY VIBE
+const quotes = [
+  {text: "No error stops me from getting your order to you.", author: "More"},
+  {text: "Smell expensive. Live independent.", author: "More's INUKA"},
+  {text: "Work hard in silence. Let your fragrance do the talking.", author: "More"},
+  {text: "A woman who dresses well owns the room before she speaks.", author: "Coco Chanel"},
+  {text: "Luxury is not a price, it's an attitude.", author: "More's INUKA"},
+  {text: "Confidence is the best accessory. Fragrance is second.", author: "More"}
+];
+
+let currentQuote = 0;
+const quoteText = document.getElementById('quoteText');
+const quoteAuthor = document.getElementById('quoteAuthor');
+const quoteDots = document.getElementById('quoteDots');
+
+// Create dots
+quotes.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.classList.add('dot');
+  if(i === 0) dot.classList.add('active');
+  dot.onclick = () => showQuote(i);
+  quoteDots.appendChild(dot);
+});
+
+function showQuote(index){
+  currentQuote = index;
+  quoteText.textContent = `"${quotes[index].text}"`;
+  quoteAuthor.textContent = `- ${quotes[index].author}`;
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === index));
+}
+
+// Auto rotate every 5 seconds
+setInterval(() => {
+  currentQuote = (currentQuote + 1) % quotes.length;
+  showQuote(currentQuote);
+}, 5000);
+</script>
+
+</body>
+</html>
